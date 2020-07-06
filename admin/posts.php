@@ -24,8 +24,27 @@
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>
-                        
-                      
+                        <?php 
+                          if (isset($_GET['source'])) {
+                              $source = $_GET['source'];
+                          }  else {
+                              $source = '';
+                          }
+                          switch ($source){
+                              case '34':
+                                  echo "NICE";
+                                  break;
+                                  case '100':
+                                    echo "NICE 100";
+                                    break;
+                                    case '200':
+                                  echo "NICE 200";
+                                  break;
+                                  default:
+                                  include "includes/view_all_posts.php";
+                                break;
+                          }
+                        ?>
                     </div>
                 </div>
                 <!-- /.row -->
