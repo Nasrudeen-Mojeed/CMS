@@ -1,4 +1,13 @@
 <?php 
+ function comfirmQuery($result){
+     global $connection;
+    if (!$result){
+        die("Query Faield" . mysqli_error($connection));
+        }
+ }
+?>
+
+<?php 
 function insert_categories() {
     global $connection;
       
@@ -14,7 +23,7 @@ function insert_categories() {
                 $create_category_query = mysqli_query($connection,$query);
 
                 if(!$create_category_query){
-                    die("Query Failed " . mysqli_error($connection));
+                    die("Query Failed. " . mysqli_error($connection));
                 }
             }
         }
