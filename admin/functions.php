@@ -1,13 +1,11 @@
 <?php 
- function comfirmQuery($result){
+ function confirmQuery($result){
      global $connection;
     if (!$result){
-        die("Query Faield" . mysqli_error($connection));
+        die("Query Faield ." . mysqli_error($connection));
         }
  }
-?>
 
-<?php 
 function insert_categories() {
     global $connection;
       
@@ -31,7 +29,7 @@ function insert_categories() {
 }
 ?>
 
-// FIND ALL CATEGORY QUERY
+<!--  FIND ALL CATEGORY QUERY -->
 <?php
 function findAllCategories(){
   global $connection;
@@ -52,7 +50,7 @@ function findAllCategories(){
 
 ?>
 
- // DELETE QUERY
+ <!-- DELETE QUERY -->
 <?php 
 function deleteCategories(){
 global $connection;

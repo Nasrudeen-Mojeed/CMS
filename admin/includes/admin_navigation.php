@@ -41,24 +41,24 @@
                                 <a href="./posts.php">View All Posts</a>
                             </li>
                             <li>
-                                <a href="posts.php?source=add_post.php">Add Post</a>
+                                <a href="./posts.php?source=add_post">Add Post</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
                     </li>
-                    <li class="active">
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Comment</a>
+                    <li class="">
+                        <a href="./comments.php"><i class="fa fa-fw fa-file"></i> Comment</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#user"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="user" class="collapse">
                             <li>
-                                <a href="#">View all User</a>
+                                <a href="users.php">View all Users</a>
                             </li>
                             <li>
-                                <a href="#">Add User</a>
+                                <a href="users.php?source=add_user">Add User</a>
                             </li>
                         </ul>
                     </li>
