@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Ausername</th>
+            <th>Username</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
