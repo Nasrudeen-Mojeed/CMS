@@ -12,7 +12,7 @@
             <div class="col-md-8">
                 
                 <?php 
-                $per_page = 2;
+                $per_page = 7;
                 if (isset($_GET['page'])) {
                     $page = $_GET['page'];
                 } else {
@@ -29,13 +29,13 @@
 
                 $count = ceil($count / $per_page);
                 
-                $query = "SELECT * FROM posts WHERE post_status = 'published' Limit $page_1, $per_page";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC Limit $page_1, $per_page";
                  $select_all_posts_query = mysqli_query($connection,$query);
                     
                     while($row = mysqli_fetch_assoc($select_all_posts_query)){
                         $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
-                        $post_author = $row['post_author'];
+                        $post_author = $row['post_user'];
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
                         $post_content = substr($row['post_content'],0,30);
@@ -48,10 +48,6 @@
                         
                         ?>
                 
-                <h1 class="page-header">
-                    <?php echo $count; ?>
-                </h1>
-
                 <!-- First Blog Post -->
                 <h2>
                     <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
