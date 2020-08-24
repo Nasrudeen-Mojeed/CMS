@@ -4,23 +4,22 @@
         $user_firstname = $_POST['user_firstname'];
         $user_lastname = $_POST['user_lastname'];
         $user_role = $_POST['user_role'];
-
-     //    $user_image = $_FILES['image']['name'];
-     //    $user_image_temp = $_FILES['image']['tmp_name'];
         
         $username = $_POST['username'];
         $user_role = $_POST['user_role'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
-     //    $user_date = date('d-m-y');
 
-     //    move_uploaded_file($user_image_temp, "../images/$user_image");
+        $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+
         $query = "INSERT INTO users (user_firstname, user_lastname, user_role, username, user_email,  user_password) ";
         $query .= "VALUE('{$user_firstname}', '{$user_lastname}', '{$user_role}', '{$username}', '{$user_email}', '{$user_password}') ";
 
         $create_user_query = mysqli_query($connection, $query);
         
         confirmQuery($create_user_query);
+
+        echo "User Created: " . " " . "<a href='users.php'> View Users</a>";
     }
 ?>
 

@@ -14,34 +14,53 @@
             $user_image = $row['user_image'];
             $user_role = $row['user_role'];
         }
-     }
+        ?>
+        <?php
+     
     if (isset($_POST['edit_user'])) {
         $user_firstname = $_POST['user_firstname'];
         $user_lastname = $_POST['user_lastname'];
         $user_role = $_POST['user_role'];
-
-     //    $user_image = $_FILES['image']['name'];
-     //    $user_image_temp = $_FILES['image']['tmp_name'];
         
         $username = $_POST['username'];
         $user_role = $_POST['user_role'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
-     //    $user_date = date('d-m-y');
 
-     //    move_uploaded_file($user_image_temp, "../images/$user_image");
-          $query = "UPDATE users SET ";
-          $query .= "user_firstname = '{$user_firstname}', ";
-          $query .= "user_lastname = '{$user_lastname}', ";
-          $query .= "user_role = '{$user_role}', ";
-          $query .= "user_email = '{$user_email}', ";
-          $query .= "user_password = '{$user_password}' ";
-          $query .= "WHERE user_id = '{$the_user_id}' ";
 
-          $edit_user_query = mysqli_query($connection,$query);
+          if (!empty($user_password)) {
+               $query_password = "SELECT user_password FROM users WHERE user_id = $the_user_id";
+               $get_user_query = mysqli_query($connection,$query_password);
 
-          confirmQuery($edit_user_query);
+               confirmQuery($get_user_query);
+
+               $row = mysqli_fetch_array($get_user_query);
+
+               $db_user_password = $row['user_password'];
+
+               if ($db_user_password != $user_password) {
+                    $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+
+               }
+
+               $query = "UPDATE users SET ";
+               $query .= "user_firstname = '{$user_firstname}', ";
+               $query .= "user_lastname = '{$user_lastname}', ";
+               $query .= "user_role = '{$user_role}', ";
+               $query .= "user_email = '{$user_email}', ";
+               $query .= "user_password = '{$hashed_password}' ";
+               $query .= "WHERE user_id = '{$the_user_id}' ";
+     
+               $edit_user_query = mysqli_query($connection,$query);
+     
+               confirmQuery($edit_user_query);
+
+               echo "User Updated" . "<a href='users.php'>View Users?</a>";
+          }
     }
+} else {
+     header("Location: index.php"); 
+}
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -58,7 +77,7 @@
 
     <div class="form-group">
           <select name="user_role" id="">
-           <option value="subscriber"><?php echo $user_role ?></option>
+           <option value="<?php echo $user_role ?>"><?php echo $user_role ?></option>
           <?php 
                if ($user_role == 'admin') {
                     echo "<option value='subscriber'>Subscriber</option>";
@@ -85,7 +104,7 @@
 
    <div class="form-group">
         <label for="user_password">Password</label>
-        <input type="password" name="user_password" class="form-control" value="<?php echo $user_password ?>">
+        <input type="password" name="user_password" class="form-control" autocomplete="off">
    </div>
 
    <div class="form-group">
